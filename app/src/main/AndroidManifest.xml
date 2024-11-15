@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TODOlist"
         tools:targetApi="31">
+        <activity android:name=".ToDoDetailActivity"  android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
