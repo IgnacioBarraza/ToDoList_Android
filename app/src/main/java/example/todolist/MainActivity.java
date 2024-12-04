@@ -1,40 +1,61 @@
 package example.todolist;
 
-import android.os.Bundle;
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
-import android.widget.ListView;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 
-import java.util.ArrayList;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    private DatabaseHelper dbHelper;
+    private ListView categoryListView;
+    private ArrayAdapter<String> adapter;
+    private List<String> categories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        List<String> todoList = new ArrayList<>();
-        todoList.add("Estudiar para PEP");
-        todoList.add("Avanzar codigo proyecto");
-        todoList.add("Ir al supermercado");
-        todoList.add("Hacer Ejercicio");
-        todoList.add("Ordenar escritorio");
-        todoList.add("Entrevista técnica");
+        dbHelper = new DatabaseHelper(this);
+        categoryListView = findViewById(R.id.lv_categories);
 
-        ListView listView = findViewById(R.id.listView);
+        // Load categories
+        loadCategories();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, todoList);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            String selectedItem = todoList.get(position);
-            Intent intent = new Intent(MainActivity.this, ToDoDetailActivity.class);
-            intent.putExtra("TODO_ITEM", selectedItem);
+        // Set up the "Add Category" button
+        Button addCategoryButton = findViewById(R.id.btn_add_category);
+        addCategoryButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AddCategoryActivity.class);
             startActivity(intent);
         });
+
+        // Handle item clicks for categories
+        categoryListView.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
+            String category = categories.get(position);
+            Intent intent = new Intent(MainActivity.this, TaskListActivity.class);
+            intent.putExtra("CATEGORY_NAME", category);
+            startActivity(intent);
+        });
+    }
+
+    // Method to load categories from the database
+    private void loadCategories() {
+        categories = dbHelper.getAllCategories();
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, categories);
+        categoryListView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Refresh categories list when coming back from AddCategoryActivity
+        loadCategories();
     }
 }

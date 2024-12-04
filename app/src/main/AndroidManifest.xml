@@ -12,7 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TODOlist"
         tools:targetApi="31">
-        <activity android:name=".ToDoDetailActivity"  android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -20,6 +19,46 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- Task List Activity (Displays tasks under a category) -->
+        <activity
+            android:name=".TaskListActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+
+        <!-- Add Category Activity (For adding a new category) -->
+        <activity
+            android:name=".AddCategoryActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="true">
+        </activity>
+
+        <!-- Task Detail Activity (Displays task details) -->
+        <activity
+            android:name=".TaskDetailActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        <!-- Add Task Activity (Displays add task) -->
+        <activity
+            android:name=".AddTaskActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        <!-- Update Task Activity (Displays update task) -->
+        <activity
+            android:name=".UpdateTaskActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
     </application>

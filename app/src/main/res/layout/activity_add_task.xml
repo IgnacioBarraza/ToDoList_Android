@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/et_task_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Task Title" />
+
+    <EditText
+        android:id="@+id/et_task_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Task Description"
+        android:layout_marginTop="8dp" />
+
+    <EditText
+        android:id="@+id/et_task_deadline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Deadline (yyyy-MM-dd)"
+        android:layout_marginTop="8dp" />
+
+    <Spinner
+        android:id="@+id/spinner_categories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/btn_save_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Task"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
